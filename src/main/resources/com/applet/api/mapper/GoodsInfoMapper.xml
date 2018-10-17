@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.applet.api.mapper.GoodsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.applet.api.entity.GoodsInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_template_id" property="userTemplateId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="old_price" property="oldPrice" jdbcType="DOUBLE" />
+    <result column="new_price" property="newPrice" jdbcType="DOUBLE" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="goods_repertory" property="goodsRepertory" jdbcType="INTEGER" />
+    <result column="goods_sales" property="goodsSales" jdbcType="INTEGER" />
+    <result column="if_sell" property="ifSell" jdbcType="BIT" />
+    <result column="goods_index" property="goodsIndex" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_template_id, goods_name, img_url, type_id, old_price, new_price, start_date, 
+    end_date, goods_repertory, goods_sales, if_sell, goods_index, create_time, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.applet.api.entity.GoodsInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bus_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.applet.api.entity.GoodsInfoExample" >
+    delete from bus_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.applet.api.entity.GoodsInfo" >
+    insert into bus_goods (id, user_template_id, goods_name, 
+      img_url, type_id, old_price, 
+      new_price, start_date, end_date, 
+      goods_repertory, goods_sales, if_sell, 
+      goods_index, create_time, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{userTemplateId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{oldPrice,jdbcType=DOUBLE}, 
+      #{newPrice,jdbcType=DOUBLE}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{goodsRepertory,jdbcType=INTEGER}, #{goodsSales,jdbcType=INTEGER}, #{ifSell,jdbcType=BIT}, 
+      #{goodsIndex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.applet.api.entity.GoodsInfo" useGeneratedKeys="true" keyProperty="id" >
+    insert into bus_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userTemplateId != null" >
+        user_template_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="oldPrice != null" >
+        old_price,
+      </if>
+      <if test="newPrice != null" >
+        new_price,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="goodsRepertory != null" >
+        goods_repertory,
+      </if>
+      <if test="goodsSales != null" >
+        goods_sales,
+      </if>
+      <if test="ifSell != null" >
+        if_sell,
+      </if>
+      <if test="goodsIndex != null" >
+        goods_index,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userTemplateId != null" >
+        #{userTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPrice != null" >
+        #{oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newPrice != null" >
+        #{newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsRepertory != null" >
+        #{goodsRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSales != null" >
+        #{goodsSales,jdbcType=INTEGER},
+      </if>
+      <if test="ifSell != null" >
+        #{ifSell,jdbcType=BIT},
+      </if>
+      <if test="goodsIndex != null" >
+        #{goodsIndex,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.applet.api.entity.GoodsInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bus_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_goods
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userTemplateId != null" >
+        user_template_id = #{record.userTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrl != null" >
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldPrice != null" >
+        old_price = #{record.oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.newPrice != null" >
+        new_price = #{record.newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsRepertory != null" >
+        goods_repertory = #{record.goodsRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsSales != null" >
+        goods_sales = #{record.goodsSales,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifSell != null" >
+        if_sell = #{record.ifSell,jdbcType=BIT},
+      </if>
+      <if test="record.goodsIndex != null" >
+        goods_index = #{record.goodsIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      user_template_id = #{record.userTemplateId,jdbcType=INTEGER},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      old_price = #{record.oldPrice,jdbcType=DOUBLE},
+      new_price = #{record.newPrice,jdbcType=DOUBLE},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      goods_repertory = #{record.goodsRepertory,jdbcType=INTEGER},
+      goods_sales = #{record.goodsSales,jdbcType=INTEGER},
+      if_sell = #{record.ifSell,jdbcType=BIT},
+      goods_index = #{record.goodsIndex,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.applet.api.entity.GoodsInfo" >
+    update bus_goods
+    <set >
+      <if test="userTemplateId != null" >
+        user_template_id = #{userTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="oldPrice != null" >
+        old_price = #{oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newPrice != null" >
+        new_price = #{newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsRepertory != null" >
+        goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSales != null" >
+        goods_sales = #{goodsSales,jdbcType=INTEGER},
+      </if>
+      <if test="ifSell != null" >
+        if_sell = #{ifSell,jdbcType=BIT},
+      </if>
+      <if test="goodsIndex != null" >
+        goods_index = #{goodsIndex,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.applet.api.entity.GoodsInfo" >
+    update bus_goods
+    set user_template_id = #{userTemplateId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      old_price = #{oldPrice,jdbcType=DOUBLE},
+      new_price = #{newPrice,jdbcType=DOUBLE},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
+      goods_sales = #{goodsSales,jdbcType=INTEGER},
+      if_sell = #{ifSell,jdbcType=BIT},
+      goods_index = #{goodsIndex,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <sql id="PageSuffix" >
+    <if test="page != null" >
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+</mapper>
