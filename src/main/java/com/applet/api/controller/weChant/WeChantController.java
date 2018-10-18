@@ -57,10 +57,10 @@ public class WeChantController {
                 Map<String, Object> map = new HashMap<>();
                 map.put("wxLogo", info.getWxLogo());
                 map.put("isDealer", false);
-                if (appletInfo.getUserId().intValue() == info.getUserId().intValue()){
-                    map.put("isDealer", true);
-                }
                 if (NullUtil.isNotNullOrEmpty(info.getUserId())){
+                    if (appletInfo.getUserId().intValue() == info.getUserId().intValue()){
+                        map.put("isDealer", true);
+                    }
                     UserInfo user = weChantService.getUserInfo(info.getUserId());
                     if (user != null){
                         if (user.getStatus()){
