@@ -1,7 +1,7 @@
 package com.applet.api.controller;
 
 import com.applet.api.entity.FigureCode;
-import com.applet.api.entity.WeChantInfo;
+import com.applet.api.entity.WeChantApplet;
 import com.applet.api.service.other.FigureCodeService;
 import com.applet.api.service.weChant.WeChantService;
 import com.applet.api.util.ImgUtil;
@@ -41,10 +41,10 @@ public class OtherController {
     @RequestMapping(value = "/code/loadFigureCode")
     public void loadFigureCode(@RequestParam("wxLogo") String wxLogo, HttpServletRequest request, HttpServletResponse response){
         try {
-            WeChantInfo weChantInfo = weChantService.selectWeChantInfo(wxLogo);
-            figureCodeService.deleteFigureCode(weChantInfo.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
+            WeChantApplet weChantApplet = weChantService.selectWeChantApplet(wxLogo);
+            figureCodeService.deleteFigureCode(weChantApplet.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
             ImgUtil imgUtil = new ImgUtil();
-            figureCodeService.saveFigureCode(weChantInfo.getId(), imgUtil.getCode(), Constants.BIND_MOBILE_FIGURE_CODE);
+            figureCodeService.saveFigureCode(weChantApplet.getId(), imgUtil.getCode(), Constants.BIND_MOBILE_FIGURE_CODE);
             BufferedImage image = imgUtil.getBuffImg();
             request.getSession().setAttribute(wxLogo, imgUtil.getCode());
             ImageIO.write(image, "JPEG", response.getOutputStream());
@@ -62,8 +62,8 @@ public class OtherController {
     @ResponseBody
     public Object getFigureCode(@RequestParam("wxLogo") String wxLogo){
         try {
-            WeChantInfo weChantInfo = weChantService.selectWeChantInfo(wxLogo);
-            FigureCode figureCode = figureCodeService.selectFigureCode(weChantInfo.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
+            WeChantApplet weChantApplet = weChantService.selectWeChantApplet(wxLogo);
+            FigureCode figureCode = figureCodeService.selectFigureCode(weChantApplet.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
             if (figureCode != null){
                 return AjaxResponse.success(figureCode.getCode());
             }

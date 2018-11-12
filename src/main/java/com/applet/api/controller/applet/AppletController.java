@@ -4,13 +4,11 @@ import com.applet.api.config.WechatAppletConfig;
 import com.applet.api.core.anno.IgnorePermission;
 import com.applet.api.core.anno.SessionScope;
 import com.applet.api.entity.AppletInfo;
-import com.applet.api.entity.RegionInfo;
 import com.applet.api.entity.ViewAppletInfo;
-import com.applet.api.entity.WeChantInfo;
+import com.applet.api.entity.WeChantApplet;
 import com.applet.api.service.applet.AppletService;
 import com.applet.api.service.other.ShippingAddressService;
 import com.applet.api.util.NullUtil;
-import com.applet.api.util.RandomUtil;
 import com.applet.api.util.TencentLocationUtils;
 import com.applet.api.util.ajax.AjaxResponse;
 import com.applet.api.util.qiniu.Config;
@@ -79,7 +77,7 @@ public class AppletController {
     /**
      * 设置小程序微信信息
      * @param appletInfo
-     * @param weChantInfo
+     * @param weChantApplet
      * @param address
      * @param title
      * @param lat
@@ -87,13 +85,13 @@ public class AppletController {
      * @return
      */
     @RequestMapping(value = "/setAppletAddress")
-    public Object setAppletAddress(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantInfo") WeChantInfo weChantInfo,
+    public Object setAppletAddress(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantApplet") WeChantApplet weChantApplet,
                                    @RequestParam String address, @RequestParam String title, @RequestParam String lat, @RequestParam String lon){
         try {
-            if (!NullUtil.isNotNullOrEmpty(weChantInfo.getUserId())){
+            if (!NullUtil.isNotNullOrEmpty(weChantApplet.getUserId())){
                 return AjaxResponse.error("未绑定账号");
             }
-            if (appletInfo.getUserId().intValue() != weChantInfo.getUserId()){
+            if (appletInfo.getUserId().intValue() != weChantApplet.getUserId()){
                 return AjaxResponse.error("您没有权限设置");
             }
             Map map = TencentLocationUtils.getLocation(lon, lat);
@@ -112,12 +110,12 @@ public class AppletController {
     /**
      * 获取小程序二维码
      * @param appletInfo
-     * @param weChantInfo
+     * @param weChantApplet
      * @return
      */
     @RequestMapping(value = "/getAppletQrCode")
-    public Object getAppletQrCode(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantInfo") WeChantInfo weChantInfo){
-        if (NullUtil.isNotNullOrEmpty(weChantInfo.getUserId()) && weChantInfo.getUserId().intValue() == appletInfo.getUserId()){
+    public Object getAppletQrCode(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantApplet") WeChantApplet weChantApplet){
+        if (NullUtil.isNotNullOrEmpty(weChantApplet.getUserId()) && weChantApplet.getUserId().intValue() == appletInfo.getUserId()){
             String path = "/upload/applet/qrCode/" + appletInfo.getAppletCode() + ".jpg";
             if (!QiniuUtil.existsFile(Config.bucketAppletPrivate, path)){
                 try {

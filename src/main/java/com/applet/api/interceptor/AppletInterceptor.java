@@ -2,7 +2,7 @@ package com.applet.api.interceptor;
 
 import com.applet.api.core.anno.IgnorePermission;
 import com.applet.api.entity.ViewAppletInfo;
-import com.applet.api.entity.WeChantInfo;
+import com.applet.api.entity.WeChantApplet;
 import com.applet.api.service.applet.AppletService;
 import com.applet.api.service.weChant.WeChantService;
 import com.applet.api.util.NullUtil;
@@ -68,12 +68,12 @@ public class AppletInterceptor extends HandlerInterceptorAdapter {
                 sendPrompt(response, "亲,登录过期啦");
                 return false;
             }
-            WeChantInfo weChantInfo = weChantService.selectWeChantInfo(appletInfo.getId(), wxLogo);
-            if (weChantInfo == null || !weChantInfo.getStatus()){
+            WeChantApplet weChantApplet = weChantService.selectWeChantApplet(appletInfo.getId(), wxLogo);
+            if (weChantApplet == null || !weChantApplet.getStatus()){
                 sendPrompt(response, "亲,账号还未开通哦!");
                 return false;
             }
-            request.getSession().setAttribute("weChantInfo", weChantInfo);
+            request.getSession().setAttribute("weChantApplet", weChantApplet);
             return true;
         } catch (Exception e) {
             logger.error("访问出错{}", e);
@@ -85,7 +85,7 @@ public class AppletInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         logger.info("清除访问者信息...");
         request.getSession().removeAttribute("appletInfo");
-        request.getSession().removeAttribute("weChantInfo");
+        request.getSession().removeAttribute("weChantApplet");
     }
 
     /**

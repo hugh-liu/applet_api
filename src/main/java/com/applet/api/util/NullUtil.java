@@ -1,9 +1,5 @@
 package com.applet.api.util;
 
-import com.applet.api.entity.WeChantInfo;
-import com.applet.api.util.constant.Constants;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -52,19 +48,5 @@ public class NullUtil {
         return (null != list && list.size() > 0) ? true : false;
     }
 
-
-//    public static WeChantInfo getRedisManger(String sessionId) {
-//        try {
-//            HttpSession session = manager.findSession(sessionId).getSession();
-//            WeChantInfo w = (WeChantInfo) SerializeUtil.unserialize((byte[]) session.getAttribute(Constants.SESSION_WE_CHANT_INFO));
-//            if (w == null) {
-//                w = (WeChantInfo) SerializeUtil.unserialize((byte[]) session.getAttribute(Constants.SESSION_WE_CHANT_INFO));
-//            }
-//            return w;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
 }

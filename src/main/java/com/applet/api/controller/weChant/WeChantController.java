@@ -49,7 +49,7 @@ public class WeChantController {
     public Object login(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @RequestParam("code") String code, @RequestParam("nickName") String nickName){
         try {
             String openId = WechatAppletConfig.getOpenId(code, appletInfo.getAppId(), appletInfo.getAppSecret());
-            WeChantInfo info = weChantService.selectWeChantInfo(appletInfo.getId(), openId, nickName);
+            WeChantApplet info = weChantService.selectWeChantApplet(appletInfo.getId(), openId, nickName);
             if (info != null){
                 if (NullUtil.isNullOrEmpty(info.getNickName()) || !nickName.equals(info.getNickName())){
                     weChantService.updateNickName(info.getId(), nickName);
@@ -87,7 +87,7 @@ public class WeChantController {
      * @return
      */
     @RequestMapping(value = "/loadPersonalCenter")
-    public Object loadPersonalCenter(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantInfo") WeChantInfo info){
+    public Object loadPersonalCenter(@SessionScope("appletInfo") ViewAppletInfo appletInfo, @SessionScope("weChantApplet") WeChantApplet info){
         Map<String, Object> map = new HashMap<>();
         map.put("mobile", null);//当前绑定账号
         if (!NullUtil.isNotNullOrEmpty(info.getUserId())){
@@ -101,13 +101,13 @@ public class WeChantController {
 
     /**
      * 发送绑定/解绑微信验证码
-     * @param weChantInfo
+     * @param weChantApplet
      * @param newMobile
      * @param request
      * @return
      */
     @RequestMapping(value = "/sendBindWxCode")
-    public Object sendBindWxCode(@SessionScope("weChantInfo") WeChantInfo weChantInfo, @RequestParam("newMobile") String newMobile,
+    public Object sendBindWxCode(@SessionScope("weChantApplet") WeChantApplet weChantApplet, @RequestParam("newMobile") String newMobile,
                                  @RequestParam("fCode") String fCode, HttpServletRequest request){
         if (NullUtil.isNullOrEmpty(newMobile)){
             return AjaxResponse.error("账号不能为空");
@@ -115,7 +115,7 @@ public class WeChantController {
         if (!RegularUtil.checkMobile(newMobile)){
             return AjaxResponse.error("账号格式不正确");
         }
-        FigureCode figureCode = figureCodeService.selectFigureCode(weChantInfo.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
+        FigureCode figureCode = figureCodeService.selectFigureCode(weChantApplet.getId(), Constants.BIND_MOBILE_FIGURE_CODE);
         if (figureCode == null){
             return AjaxResponse.error("图形码错误");
         }
@@ -133,9 +133,9 @@ public class WeChantController {
         String smsCode = RandomUtil.getRandomStr(6);
         String operation = "";
         String mobile = "";
-        if (NullUtil.isNotNullOrEmpty(weChantInfo.getUserId())){
+        if (NullUtil.isNotNullOrEmpty(weChantApplet.getUserId())){
             //修改绑定账号时验证码默认发送给绑定账号
-            UserInfo oldInfo = weChantService.getUserInfo(weChantInfo.getUserId());
+            UserInfo oldInfo = weChantService.getUserInfo(weChantApplet.getUserId());
             if (oldInfo == null){
                 return AjaxResponse.error("Error: user is null");
             }
@@ -183,18 +183,18 @@ public class WeChantController {
 
     /**
      * 绑定账号
-     * @param weChantInfo
+     * @param weChantApplet
      * @param mobile
      * @param code
      * @return
      */
     @RequestMapping(value = "/bindingAccount")
-    public Object bindingAccount(@SessionScope("weChantInfo") WeChantInfo weChantInfo,
+    public Object bindingAccount(@SessionScope("weChantApplet") WeChantApplet weChantApplet,
                                  @RequestParam("mobile") String mobile, @RequestParam("code") String code){
         try {
             AuthCode authCode = null;
-            if (NullUtil.isNotNullOrEmpty(weChantInfo.getUserId())){
-                UserInfo userInfo = weChantService.getUserInfo(weChantInfo.getUserId());
+            if (NullUtil.isNotNullOrEmpty(weChantApplet.getUserId())){
+                UserInfo userInfo = weChantService.getUserInfo(weChantApplet.getUserId());
                 authCode = authCodeService.selectAuthCodeByMobile(userInfo.getMobile());
             } else {
                 authCode = authCodeService.selectAuthCodeByMobile(mobile);
@@ -205,7 +205,7 @@ public class WeChantController {
             if (!code.equals(authCode.getAuthCode())){
                 return AjaxResponse.error("验证码错误");
             }
-            weChantService.updateWeChant(weChantInfo, mobile, code);
+            weChantService.updateWeChant(weChantApplet, mobile, code);
             return AjaxResponse.success("绑定成功");
         } catch (Exception e) {
             logger.error("微信绑定账号出错{}", e);
