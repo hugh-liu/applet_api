@@ -17,8 +17,8 @@ public class AppStart {
 
     public void onStart() throws IOException {
         //这地方可以放缓存数据
-        log.info("平台正在启动");
-        log.info("版权所有：Copyright © 2016 mdanbao.com");
+        log.info("平台正在启动...");
+        log.info("版权所有：Copyright © 2018 appletsite.com");
         log.info("读取配置文件到缓存");
         Properties config = EncryptPropertyConfigurer.getProperties();
         log.info("模板引擎全局变量定义");
