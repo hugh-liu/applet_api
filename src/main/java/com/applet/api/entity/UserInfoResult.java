@@ -11,7 +11,7 @@ public class UserInfoResult {
     private String nickName;
     private String avatarUrl;
     private Boolean gender;
-    private Date birthday;
+    private String birthday;
     private String email;
     private Double balance;
     private Integer integral;
@@ -48,11 +48,11 @@ public class UserInfoResult {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

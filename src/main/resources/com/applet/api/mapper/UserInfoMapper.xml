@@ -10,7 +10,7 @@
     <result column="encrypted" property="encrypted" jdbcType="VARCHAR" />
     <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="BIT" />
-    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="is_dealer" property="isDealer" jdbcType="BIT" />
     <result column="balance" property="balance" jdbcType="DOUBLE" />
@@ -130,7 +130,7 @@
       status)
     values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{encrypted,jdbcType=VARCHAR}, 
-      #{avatarUrl,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{birthday,jdbcType=DATE}, 
+      #{avatarUrl,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{birthday,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{isDealer,jdbcType=BIT}, #{balance,jdbcType=DOUBLE}, 
       #{freeBalance,jdbcType=DOUBLE}, #{integral,jdbcType=INTEGER}, #{goodsCount,jdbcType=INTEGER}, 
       #{country,jdbcType=INTEGER}, #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, 
@@ -233,7 +233,7 @@
         #{gender,jdbcType=BIT},
       </if>
       <if test="birthday != null" >
-        #{birthday,jdbcType=DATE},
+        #{birthday,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
@@ -310,7 +310,7 @@
         gender = #{record.gender,jdbcType=BIT},
       </if>
       <if test="record.birthday != null" >
-        birthday = #{record.birthday,jdbcType=DATE},
+        birthday = #{record.birthday,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
@@ -366,7 +366,7 @@
       encrypted = #{record.encrypted,jdbcType=VARCHAR},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=BIT},
-      birthday = #{record.birthday,jdbcType=DATE},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       is_dealer = #{record.isDealer,jdbcType=BIT},
       balance = #{record.balance,jdbcType=DOUBLE},
@@ -409,7 +409,7 @@
         gender = #{gender,jdbcType=BIT},
       </if>
       <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=DATE},
+        birthday = #{birthday,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -462,7 +462,7 @@
       encrypted = #{encrypted,jdbcType=VARCHAR},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=BIT},
-      birthday = #{birthday,jdbcType=DATE},
+      birthday = #{birthday,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       is_dealer = #{isDealer,jdbcType=BIT},
       balance = #{balance,jdbcType=DOUBLE},
