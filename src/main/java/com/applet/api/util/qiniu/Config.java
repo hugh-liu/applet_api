@@ -53,20 +53,14 @@ public class Config {
      */
     public static final int CONNECTION_POOL_MAX_IDLE_MINUTES = 5;
 
-    public static final String bucketAppletPrivate = "appletprivate";
-    public static final String bucketAppletPublic = "appletpublic";
+    public static final String bucketAppletPrivate = "appletprivate";//七牛云私有图片空间
+    public static final String bucketTemplateFile = "templatefile";//七牛云私有模板文件空间
+    public static final String bucketVoiceFile = "appletvoice";//七牛云私有音频文件空间
+    public static final String bucketAppletPublic = "appletpublic";//七牛云公共空间
 
-    public static final String downURLAppletPublicUrL;//公共空间地址
-    public static final String downURLAppletPrivateUrl;//私有空间地址
-
-    static {
-        if(PropertiesLoadUtils.isRun()){
-            downURLAppletPublicUrL = "";
-            downURLAppletPrivateUrl = "http://images.wscxy.xin/";
-        } else {
-            downURLAppletPublicUrL = "";
-            downURLAppletPrivateUrl = "http://images.wscxy.xin/";//http://pa6yvjmm1.bkt.clouddn.com/
-        }
-    }
+    public static final String downURLAppletPublicUrL = "";//公共空间地址
+    public static final String downURLAppletPrivatePicUrl = "http://images.wscxy.xin/";//图片私有空间地址
+    public static final String downURLAppletPrivateFileUrl = "http://template.wscxy.xin/";//模板文件私有空间地址
+    public static final String downURLAppletPrivateVoiceUrl = "http://voice.wscxy.xin/";//模板文件私有空间地址
 
 }

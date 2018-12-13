@@ -56,6 +56,10 @@
             <mvc:mapping path="/upload/**/*.jpg"/>
             <bean class="com.applet.api.interceptor.ImgInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/upload/SysFile/**/*"/>
+            <bean class="com.applet.api.interceptor.SysFileInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <bean id="multipartResolver"

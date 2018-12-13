@@ -126,7 +126,7 @@ public class QiniuUtil {
      */
     public static String generateQiniuPrivateDownURL(String requestURI, Long expires) {
         Auth auth = Auth.create(Config.AK, Config.SK);
-        String downloadRUL = auth.privateDownloadUrl(Config.downURLAppletPrivateUrl + requestURI, (null == expires) ? 60 : expires);
+        String downloadRUL = auth.privateDownloadUrl(Config.downURLAppletPrivatePicUrl + requestURI, (null == expires) ? 60 : expires);
         return downloadRUL;
     }
 
@@ -138,6 +138,22 @@ public class QiniuUtil {
     public static String generateQiniuPublicDownURL(String requestURI) {
         String downloadRUL = Config.downURLAppletPublicUrL + requestURI;
         return downloadRUL;
+    }
+
+    /**
+     * 生成模板文件下载凭证 60s
+     * @param requestURI
+     * @param expires
+     * @return
+     */
+    public static String generateQiniuTemplateDownURL(String requestURI, Long expires) {
+        Auth auth = Auth.create(Config.AK, Config.SK);
+        String downloadRUL = auth.privateDownloadUrl(Config.downURLAppletPrivateFileUrl + requestURI, (null == expires) ? 60 : expires);
+        return downloadRUL;
+    }
+
+    public static String generateQiniuTemplateDownURL(String requestURI) {
+        return generateQiniuTemplateDownURL(requestURI, null);
     }
 
 
