@@ -42,6 +42,7 @@ public class TemplateController {
     @IgnorePermission
     public Object queryPageInfo(@SessionScope("appletInfo") ViewAppletInfo applet, @RequestParam("pageLogo") String pageLogo){
         Map<String, Object> map = new HashMap<>();
+        Integer userTemplateId = null;
         List<ViewUserTemplateConfig> configList = templateService.selectUserTemplateConfigList(applet.getUserTemplateId(), pageLogo);
         for (ViewUserTemplateConfig record:configList) {
             if (record.getDataType().intValue() == 2){
@@ -49,7 +50,10 @@ public class TemplateController {
             } else if (record.getDataType().intValue() == 3){
                 map.put(record.getDataLogo(), templateService.selectTemplateTextList(applet.getUserTemplateId(), record.getConfigId()));
             }
+            userTemplateId = record.getId();
         }
+        List<GoodsType> goodsTypeList = templateService.selectGoodsTypeList(userTemplateId);
+        map.put("goodsTypeList", goodsTypeList);
         return AjaxResponse.success(map);
     }
 

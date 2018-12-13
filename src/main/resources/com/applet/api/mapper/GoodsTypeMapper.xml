@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.applet.api.entity.GoodsType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_template_id" property="userTemplateId" jdbcType="INTEGER" />
+    <result column="type_icon" property="typeIcon" jdbcType="VARCHAR" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
     <result column="type_index" property="typeIndex" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_template_id, type_name, type_index, create_time, status
+    id, user_template_id, type_icon, type_name, type_index, create_time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.applet.api.entity.GoodsTypeExample" >
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.applet.api.entity.GoodsType" >
-    insert into bus_goods_type (id, user_template_id, type_name, 
-      type_index, create_time, status
-      )
-    values (#{id,jdbcType=INTEGER}, #{userTemplateId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, 
-      #{typeIndex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}
-      )
+    insert into bus_goods_type (id, user_template_id, type_icon, 
+      type_name, type_index, create_time, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{userTemplateId,jdbcType=INTEGER}, #{typeIcon,jdbcType=VARCHAR}, 
+      #{typeName,jdbcType=VARCHAR}, #{typeIndex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.applet.api.entity.GoodsType" useGeneratedKeys="true" keyProperty="id" >
     insert into bus_goods_type
@@ -117,6 +118,9 @@
       </if>
       <if test="userTemplateId != null" >
         user_template_id,
+      </if>
+      <if test="typeIcon != null" >
+        type_icon,
       </if>
       <if test="typeName != null" >
         type_name,
@@ -137,6 +141,9 @@
       </if>
       <if test="userTemplateId != null" >
         #{userTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="typeIcon != null" >
+        #{typeIcon,jdbcType=VARCHAR},
       </if>
       <if test="typeName != null" >
         #{typeName,jdbcType=VARCHAR},
@@ -167,6 +174,9 @@
       <if test="record.userTemplateId != null" >
         user_template_id = #{record.userTemplateId,jdbcType=INTEGER},
       </if>
+      <if test="record.typeIcon != null" >
+        type_icon = #{record.typeIcon,jdbcType=VARCHAR},
+      </if>
       <if test="record.typeName != null" >
         type_name = #{record.typeName,jdbcType=VARCHAR},
       </if>
@@ -188,6 +198,7 @@
     update bus_goods_type
     set id = #{record.id,jdbcType=INTEGER},
       user_template_id = #{record.userTemplateId,jdbcType=INTEGER},
+      type_icon = #{record.typeIcon,jdbcType=VARCHAR},
       type_name = #{record.typeName,jdbcType=VARCHAR},
       type_index = #{record.typeIndex,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -201,6 +212,9 @@
     <set >
       <if test="userTemplateId != null" >
         user_template_id = #{userTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="typeIcon != null" >
+        type_icon = #{typeIcon,jdbcType=VARCHAR},
       </if>
       <if test="typeName != null" >
         type_name = #{typeName,jdbcType=VARCHAR},
@@ -220,6 +234,7 @@
   <update id="updateByPrimaryKey" parameterType="com.applet.api.entity.GoodsType" >
     update bus_goods_type
     set user_template_id = #{userTemplateId,jdbcType=INTEGER},
+      type_icon = #{typeIcon,jdbcType=VARCHAR},
       type_name = #{typeName,jdbcType=VARCHAR},
       type_index = #{typeIndex,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

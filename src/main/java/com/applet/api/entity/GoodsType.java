@@ -8,6 +8,8 @@ public class GoodsType implements Serializable {
 
     private Integer userTemplateId;
 
+    private String typeIcon;
+
     private String typeName;
 
     private Integer typeIndex;
@@ -32,6 +34,14 @@ public class GoodsType implements Serializable {
 
     public void setUserTemplateId(Integer userTemplateId) {
         this.userTemplateId = userTemplateId;
+    }
+
+    public String getTypeIcon() {
+        return typeIcon;
+    }
+
+    public void setTypeIcon(String typeIcon) {
+        this.typeIcon = typeIcon;
     }
 
     public String getTypeName() {

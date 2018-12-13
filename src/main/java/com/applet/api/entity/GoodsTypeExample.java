@@ -236,6 +236,76 @@ public class GoodsTypeExample {
             return (Criteria) this;
         }
 
+        public Criteria andTypeIconIsNull() {
+            addCriterion("type_icon is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconIsNotNull() {
+            addCriterion("type_icon is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconEqualTo(String value) {
+            addCriterion("type_icon =", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconNotEqualTo(String value) {
+            addCriterion("type_icon <>", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconGreaterThan(String value) {
+            addCriterion("type_icon >", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconGreaterThanOrEqualTo(String value) {
+            addCriterion("type_icon >=", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconLessThan(String value) {
+            addCriterion("type_icon <", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconLessThanOrEqualTo(String value) {
+            addCriterion("type_icon <=", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconLike(String value) {
+            addCriterion("type_icon like", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconNotLike(String value) {
+            addCriterion("type_icon not like", value, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconIn(List<String> values) {
+            addCriterion("type_icon in", values, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconNotIn(List<String> values) {
+            addCriterion("type_icon not in", values, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconBetween(String value1, String value2) {
+            addCriterion("type_icon between", value1, value2, "typeIcon");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIconNotBetween(String value1, String value2) {
+            addCriterion("type_icon not between", value1, value2, "typeIcon");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeNameIsNull() {
             addCriterion("type_name is null");
             return (Criteria) this;
