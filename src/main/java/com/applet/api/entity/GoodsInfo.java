@@ -12,17 +12,17 @@ public class GoodsInfo implements Serializable {
 
     private String imgUrl;
 
+    private Integer sysTypeId;
+
     private Integer typeId;
 
-    private Double oldPrice;
+    private Double minPrice;
 
-    private Double newPrice;
+    private Double maxPrice;
 
     private Date startDate;
 
     private Date endDate;
-
-    private Integer goodsRepertory;
 
     private Integer goodsSales;
 
@@ -68,6 +68,14 @@ public class GoodsInfo implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+    public Integer getSysTypeId() {
+        return sysTypeId;
+    }
+
+    public void setSysTypeId(Integer sysTypeId) {
+        this.sysTypeId = sysTypeId;
+    }
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -76,20 +84,20 @@ public class GoodsInfo implements Serializable {
         this.typeId = typeId;
     }
 
-    public Double getOldPrice() {
-        return oldPrice;
+    public Double getMinPrice() {
+        return minPrice;
     }
 
-    public void setOldPrice(Double oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setMinPrice(Double minPrice) {
+        this.minPrice = minPrice;
     }
 
-    public Double getNewPrice() {
-        return newPrice;
+    public Double getMaxPrice() {
+        return maxPrice;
     }
 
-    public void setNewPrice(Double newPrice) {
-        this.newPrice = newPrice;
+    public void setMaxPrice(Double maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
     public Date getStartDate() {
@@ -106,14 +114,6 @@ public class GoodsInfo implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public Integer getGoodsRepertory() {
-        return goodsRepertory;
-    }
-
-    public void setGoodsRepertory(Integer goodsRepertory) {
-        this.goodsRepertory = goodsRepertory;
     }
 
     public Integer getGoodsSales() {

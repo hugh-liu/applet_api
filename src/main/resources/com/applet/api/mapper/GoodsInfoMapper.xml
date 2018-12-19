@@ -6,12 +6,12 @@
     <result column="user_template_id" property="userTemplateId" jdbcType="INTEGER" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="sys_type_id" property="sysTypeId" jdbcType="INTEGER" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
-    <result column="old_price" property="oldPrice" jdbcType="DOUBLE" />
-    <result column="new_price" property="newPrice" jdbcType="DOUBLE" />
+    <result column="min_price" property="minPrice" jdbcType="DOUBLE" />
+    <result column="max_price" property="maxPrice" jdbcType="DOUBLE" />
     <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
     <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
-    <result column="goods_repertory" property="goodsRepertory" jdbcType="INTEGER" />
     <result column="goods_sales" property="goodsSales" jdbcType="INTEGER" />
     <result column="if_sell" property="ifSell" jdbcType="BIT" />
     <result column="goods_index" property="goodsIndex" jdbcType="INTEGER" />
@@ -77,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_template_id, goods_name, img_url, type_id, old_price, new_price, start_date, 
-    end_date, goods_repertory, goods_sales, if_sell, goods_index, create_time, status
+    id, user_template_id, goods_name, img_url, sys_type_id, type_id, min_price, max_price, 
+    start_date, end_date, goods_sales, if_sell, goods_index, create_time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.applet.api.entity.GoodsInfoExample" >
     select
@@ -113,15 +113,15 @@
   </delete>
   <insert id="insert" parameterType="com.applet.api.entity.GoodsInfo" >
     insert into bus_goods (id, user_template_id, goods_name, 
-      img_url, type_id, old_price, 
-      new_price, start_date, end_date, 
-      goods_repertory, goods_sales, if_sell, 
+      img_url, sys_type_id, type_id, 
+      min_price, max_price, start_date, 
+      end_date, goods_sales, if_sell, 
       goods_index, create_time, status
       )
     values (#{id,jdbcType=INTEGER}, #{userTemplateId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
-      #{imgUrl,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{oldPrice,jdbcType=DOUBLE}, 
-      #{newPrice,jdbcType=DOUBLE}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
-      #{goodsRepertory,jdbcType=INTEGER}, #{goodsSales,jdbcType=INTEGER}, #{ifSell,jdbcType=BIT}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{sysTypeId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, 
+      #{minPrice,jdbcType=DOUBLE}, #{maxPrice,jdbcType=DOUBLE}, #{startDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP}, #{goodsSales,jdbcType=INTEGER}, #{ifSell,jdbcType=BIT}, 
       #{goodsIndex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}
       )
   </insert>
@@ -140,23 +140,23 @@
       <if test="imgUrl != null" >
         img_url,
       </if>
+      <if test="sysTypeId != null" >
+        sys_type_id,
+      </if>
       <if test="typeId != null" >
         type_id,
       </if>
-      <if test="oldPrice != null" >
-        old_price,
+      <if test="minPrice != null" >
+        min_price,
       </if>
-      <if test="newPrice != null" >
-        new_price,
+      <if test="maxPrice != null" >
+        max_price,
       </if>
       <if test="startDate != null" >
         start_date,
       </if>
       <if test="endDate != null" >
         end_date,
-      </if>
-      <if test="goodsRepertory != null" >
-        goods_repertory,
       </if>
       <if test="goodsSales != null" >
         goods_sales,
@@ -187,23 +187,23 @@
       <if test="imgUrl != null" >
         #{imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="sysTypeId != null" >
+        #{sysTypeId,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         #{typeId,jdbcType=INTEGER},
       </if>
-      <if test="oldPrice != null" >
-        #{oldPrice,jdbcType=DOUBLE},
+      <if test="minPrice != null" >
+        #{minPrice,jdbcType=DOUBLE},
       </if>
-      <if test="newPrice != null" >
-        #{newPrice,jdbcType=DOUBLE},
+      <if test="maxPrice != null" >
+        #{maxPrice,jdbcType=DOUBLE},
       </if>
       <if test="startDate != null" >
         #{startDate,jdbcType=TIMESTAMP},
       </if>
       <if test="endDate != null" >
         #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="goodsRepertory != null" >
-        #{goodsRepertory,jdbcType=INTEGER},
       </if>
       <if test="goodsSales != null" >
         #{goodsSales,jdbcType=INTEGER},
@@ -243,23 +243,23 @@
       <if test="record.imgUrl != null" >
         img_url = #{record.imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.sysTypeId != null" >
+        sys_type_id = #{record.sysTypeId,jdbcType=INTEGER},
+      </if>
       <if test="record.typeId != null" >
         type_id = #{record.typeId,jdbcType=INTEGER},
       </if>
-      <if test="record.oldPrice != null" >
-        old_price = #{record.oldPrice,jdbcType=DOUBLE},
+      <if test="record.minPrice != null" >
+        min_price = #{record.minPrice,jdbcType=DOUBLE},
       </if>
-      <if test="record.newPrice != null" >
-        new_price = #{record.newPrice,jdbcType=DOUBLE},
+      <if test="record.maxPrice != null" >
+        max_price = #{record.maxPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.startDate != null" >
         start_date = #{record.startDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endDate != null" >
         end_date = #{record.endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.goodsRepertory != null" >
-        goods_repertory = #{record.goodsRepertory,jdbcType=INTEGER},
       </if>
       <if test="record.goodsSales != null" >
         goods_sales = #{record.goodsSales,jdbcType=INTEGER},
@@ -287,12 +287,12 @@
       user_template_id = #{record.userTemplateId,jdbcType=INTEGER},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
       img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      sys_type_id = #{record.sysTypeId,jdbcType=INTEGER},
       type_id = #{record.typeId,jdbcType=INTEGER},
-      old_price = #{record.oldPrice,jdbcType=DOUBLE},
-      new_price = #{record.newPrice,jdbcType=DOUBLE},
+      min_price = #{record.minPrice,jdbcType=DOUBLE},
+      max_price = #{record.maxPrice,jdbcType=DOUBLE},
       start_date = #{record.startDate,jdbcType=TIMESTAMP},
       end_date = #{record.endDate,jdbcType=TIMESTAMP},
-      goods_repertory = #{record.goodsRepertory,jdbcType=INTEGER},
       goods_sales = #{record.goodsSales,jdbcType=INTEGER},
       if_sell = #{record.ifSell,jdbcType=BIT},
       goods_index = #{record.goodsIndex,jdbcType=INTEGER},
@@ -314,23 +314,23 @@
       <if test="imgUrl != null" >
         img_url = #{imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="sysTypeId != null" >
+        sys_type_id = #{sysTypeId,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         type_id = #{typeId,jdbcType=INTEGER},
       </if>
-      <if test="oldPrice != null" >
-        old_price = #{oldPrice,jdbcType=DOUBLE},
+      <if test="minPrice != null" >
+        min_price = #{minPrice,jdbcType=DOUBLE},
       </if>
-      <if test="newPrice != null" >
-        new_price = #{newPrice,jdbcType=DOUBLE},
+      <if test="maxPrice != null" >
+        max_price = #{maxPrice,jdbcType=DOUBLE},
       </if>
       <if test="startDate != null" >
         start_date = #{startDate,jdbcType=TIMESTAMP},
       </if>
       <if test="endDate != null" >
         end_date = #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="goodsRepertory != null" >
-        goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
       </if>
       <if test="goodsSales != null" >
         goods_sales = #{goodsSales,jdbcType=INTEGER},
@@ -355,12 +355,12 @@
     set user_template_id = #{userTemplateId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       img_url = #{imgUrl,jdbcType=VARCHAR},
+      sys_type_id = #{sysTypeId,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=INTEGER},
-      old_price = #{oldPrice,jdbcType=DOUBLE},
-      new_price = #{newPrice,jdbcType=DOUBLE},
+      min_price = #{minPrice,jdbcType=DOUBLE},
+      max_price = #{maxPrice,jdbcType=DOUBLE},
       start_date = #{startDate,jdbcType=TIMESTAMP},
       end_date = #{endDate,jdbcType=TIMESTAMP},
-      goods_repertory = #{goodsRepertory,jdbcType=INTEGER},
       goods_sales = #{goodsSales,jdbcType=INTEGER},
       if_sell = #{ifSell,jdbcType=BIT},
       goods_index = #{goodsIndex,jdbcType=INTEGER},

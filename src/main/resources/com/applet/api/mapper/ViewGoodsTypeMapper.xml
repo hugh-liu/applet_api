@@ -8,9 +8,8 @@
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="old_price" property="oldPrice" jdbcType="DOUBLE" />
-    <result column="new_price" property="newPrice" jdbcType="DOUBLE" />
-    <result column="goods_repertory" property="goodsRepertory" jdbcType="INTEGER" />
+    <result column="min_price" property="minPrice" jdbcType="DOUBLE" />
+    <result column="max_price" property="maxPrice" jdbcType="DOUBLE" />
     <result column="goods_sales" property="goodsSales" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -43,8 +42,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_template_id, goods_name, img_url, type_id, type_name, old_price, new_price, 
-    goods_repertory, goods_sales
+    id, user_template_id, goods_name, img_url, type_id, type_name, min_price, max_price, 
+    goods_sales
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.applet.api.entity.ViewGoodsTypeExample" >
     select

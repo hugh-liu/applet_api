@@ -15,11 +15,9 @@ public class ViewGoodsType implements Serializable {
 
     private String typeName;
 
-    private Double oldPrice;
+    private Double minPrice;
 
-    private Double newPrice;
-
-    private Integer goodsRepertory;
+    private Double maxPrice;
 
     private Integer goodsSales;
 
@@ -73,28 +71,20 @@ public class ViewGoodsType implements Serializable {
         this.typeName = typeName;
     }
 
-    public Double getOldPrice() {
-        return oldPrice;
+    public Double getMinPrice() {
+        return minPrice;
     }
 
-    public void setOldPrice(Double oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setMinPrice(Double minPrice) {
+        this.minPrice = minPrice;
     }
 
-    public Double getNewPrice() {
-        return newPrice;
+    public Double getMaxPrice() {
+        return maxPrice;
     }
 
-    public void setNewPrice(Double newPrice) {
-        this.newPrice = newPrice;
-    }
-
-    public Integer getGoodsRepertory() {
-        return goodsRepertory;
-    }
-
-    public void setGoodsRepertory(Integer goodsRepertory) {
-        this.goodsRepertory = goodsRepertory;
+    public void setMaxPrice(Double maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
     public Integer getGoodsSales() {
